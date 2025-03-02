@@ -1,0 +1,69 @@
+<div class="bg-[#212121] scroll-m-0 h-screen">
+  <h1 class="text-2xl p-2 ml-4 font-bold text-white">
+    <ng-icon name="bootstrapRobot" /> ATTY
+  </h1>
+  <div
+    class="flex flex-col w-3xl mx-auto bg-[#212121] rounded-lg overflow-hidden"
+  >
+    <div class="flex flex-col p-4 space-y-4 h-96 overflow-auto chat">
+      <div
+        *ngIf="messages.length == 0"
+        class="text-3xl font-semibold mt-72 px-4 py-2 flex justify-center items-center text-center rounded-4xl text-white"
+      >
+        How can i help you?
+      </div>
+      <div *ngFor="let message of messages">
+        <div
+          *ngIf="message.role === 'user'"
+          class="flex px-4 py-2 float-end bg-[#303030] rounded-4xl max-w-xs text-white"
+        >
+          {{ message.content }}
+          <br />
+        </div>
+        <div
+          *ngIf="message.role === 'bot'"
+          class="flex px-4 py-2 float-start rounded-4xl max-w-2xl text-white"
+        >
+          <!-- {{ message.content }} -->
+          <div [innerHTML]="formatBotMessage(message.content)"></div>
+        </div>
+      </div>
+      <div
+        *ngIf="isLoading"
+        class="text-white p-6 rounded-xl max-w-max animate-pulse"
+      >
+        <div class="flex items-center">
+          <div class="w-3.5 h-3.5 bg-white rounded-full animate-bounce"></div>
+          <div class="w-3.5 h-3.5 bg-white rounded-full animate-bounce"></div>
+          <div class="w-3.5 h-3.5 bg-white rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex p-5 md:mt-5 mt-[80%] ml-[3%] mr-[3%] bg-[#303030] rounded-2xl mb-3"
+    >
+      <input
+        type="text"
+        [(ngModel)]="dummy"
+        (keyup.enter)="sendMessage()"
+        placeholder="Ask anything"
+        class="bg-[#303030] text-white flex-grow px-4 py-2 rounded-3xl focus:outline-none"
+      />
+      <button
+        *ngIf="!isLoading"
+        (click)="sendMessage()"
+        class="ml-2 bg-white text-black px-4 py-2 rounded-3xl hover:bg-gray-400 cursor-pointer"
+      >
+        @if (dummy.length==0) { Send } @else {
+        <ng-icon name="bootstrapArrowUp" />
+        }
+      </button>
+      <button
+        *ngIf="isLoading"
+        class="ml-2 text-black px-4 py-2 rounded-3xl bg-gray-500 cursor-pointer"
+      >
+        <ng-icon name="bootstrapStopCircleFill" />
+      </button>
+    </div>
+  </div>
+</div>
