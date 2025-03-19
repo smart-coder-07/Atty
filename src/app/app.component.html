@@ -1,6 +1,6 @@
 <div class="bg-[#212121] scroll-m-0 h-screen">
   <h1 class="text-2xl p-2 ml-4 font-bold text-white">
-    <ng-icon name="bootstrapRobot" /> ATTY
+    <ng-icon name="bootstrapRobot" /> Service Central
   </h1>
   <div
     class="flex flex-col w-3xl mx-auto bg-[#212121] rounded-lg overflow-hidden"
@@ -10,6 +10,7 @@
         *ngIf="messages.length == 0"
         class="text-3xl font-semibold mt-72 px-4 py-2 flex justify-center items-center text-center rounded-4xl text-white"
       >
+        Welcome to service central <br />
         How can i help you?
       </div>
       <div *ngFor="let message of messages">
@@ -24,8 +25,7 @@
           *ngIf="message.role === 'bot'"
           class="flex px-4 py-2 float-start rounded-4xl max-w-2xl text-white"
         >
-          <!-- {{ message.content }} -->
-          <div [innerHTML]="formatBotMessage(message.content)"></div>
+          {{ message.content }}
         </div>
       </div>
       <div

@@ -1,3 +1,3 @@
 export interface InputObj {
-  question: string;
+  text: string;
 }

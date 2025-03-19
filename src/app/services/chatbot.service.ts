@@ -11,7 +11,7 @@ export class ChatbotService {
 
   getResponse(inputObj: InputObj): any {
     return this.http.post<{ response: string }>(
-      'https://awesome-pilot-452418-n3.el.r.appspot.com/ask',
+      'http://127.0.0.1:5000/chat',
       inputObj
     );
   }

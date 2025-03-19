@@ -27,7 +27,7 @@ export class AppComponent {
     private sanitizer: DomSanitizer
   ) {}
   inputObj: InputObj = {
-    question: '',
+    text: '',
   };
   dummy: string = '';
   response: string = '';
@@ -41,21 +41,21 @@ export class AppComponent {
   sendMessage() {
     if (this.dummy.trim() === '') return;
     this.isLoading = true;
-    this.inputObj.question = this.dummy;
+    this.inputObj.text = this.dummy;
     this.dummy = '';
     this.messages.push({
-      content: this.inputObj.question,
+      content: this.inputObj.text,
       role: 'user',
     });
 
     this.service.getResponse(this.inputObj).subscribe(
       (res: any) => {
         this.messages.push({
-          content: res.response,
+          content: res.fulfillmentText,
           role: 'bot',
         });
         this.isLoading = false;
-        console.log(res.response);
+        console.log(res.fulfillmentText);
       },
       (err: any) => {
         console.log(err);
